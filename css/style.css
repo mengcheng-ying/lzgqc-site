@@ -141,18 +141,26 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--primary-deep);
+  /* 图片加载期间的兜底底色：近似成图的天空-草原色，避免突兀蓝屏 */
+  background: linear-gradient(180deg, #7cb4e4 0%, #a9cc8f 55%, #6f9e5a 100%);
   overflow: hidden;
 }
 
-/* 超清背景层：缓慢呼吸式微缩放，营造风吹草动的生命感 */
+/* 超清背景层：<img> 实现，加载完成后淡入，消除"蓝屏闪烁" */
 .hero-bg {
   position: absolute;
-  inset: -3%;
-  background: url('../assets/images/hero-bg.jpg') center / cover no-repeat;
+  top: -3%;
+  left: -3%;
+  width: 106%;
+  height: 106%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.7s ease;
   animation: bgBreathe 22s ease-in-out infinite;
   will-change: transform;
 }
+
+.hero-bg.loaded { opacity: 1; }
 
 @keyframes bgBreathe {
   0%, 100% { transform: scale(1) translate(0, 0); }
@@ -461,31 +469,48 @@ img { max-width: 100%; display: block; }
 }
 
 /* ===== 游戏攻略 ===== */
-.guide-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px;
 }
 
-.guide-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+.guide-mini {
+  display: block;
   background: #fff;
   border: 2px solid var(--border);
-  border-left: 5px solid var(--primary);
   border-radius: var(--radius);
-  padding: 24px 28px;
+  padding: 24px 24px 20px;
   transition: all var(--transition);
 }
 
-.guide-card:hover {
-  border-color: var(--primary);
-  border-left-color: var(--accent);
+.guide-mini:hover {
+  transform: translateY(-5px);
   box-shadow: var(--shadow);
-  transform: translateY(-2px);
+  border-color: var(--primary);
 }
+
+.guide-mini h3 {
+  font-size: 1.02rem;
+  color: var(--text-primary);
+  line-height: 1.55;
+  margin: 10px 0 8px;
+}
+
+.guide-mini p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.guide-mini-all {
+  background: linear-gradient(135deg, rgba(36, 86, 200, 0.06), rgba(255, 157, 46, 0.05));
+  border-style: dashed;
+}
+
+.guide-mini-all h3 { color: var(--primary); }
+
+.guide-mini-all:hover { border-style: dashed; border-color: var(--primary); }
 
 .guide-tag {
   display: inline-block;
@@ -495,26 +520,6 @@ img { max-width: 100%; display: block; }
   background: rgba(36, 86, 200, 0.08);
   padding: 3px 12px;
   border-radius: 12px;
-  margin-bottom: 8px;
-}
-
-.guide-card h3 {
-  font-size: 1.08rem;
-  color: var(--text-primary);
-  margin-bottom: 6px;
-}
-
-.guide-card p {
-  font-size: 0.86rem;
-  color: var(--text-muted);
-}
-
-.guide-arrow {
-  flex-shrink: 0;
-  color: var(--primary);
-  font-size: 0.88rem;
-  font-weight: 600;
-  white-space: nowrap;
 }
 
 .guide-more {
@@ -718,8 +723,6 @@ img { max-width: 100%; display: block; }
   .hero-content { padding: 100px 18px 70px; }
   .hero-title { letter-spacing: 3px; }
   .hero-slogan { letter-spacing: 2px; }
-
-  .guide-card { flex-direction: column; align-items: flex-start; }
 
   .notice-bar { font-size: 0.8rem; }
 }

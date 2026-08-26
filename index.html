@@ -24,7 +24,7 @@
         <a href="#home" class="active">首页</a>
         <a href="#features">游戏特色</a>
         <a href="#classes">职业介绍</a>
-        <a href="#guides">游戏攻略</a>
+        <a href="articles.html">游戏攻略</a>
         <a href="#download" class="nav-download">下载游戏</a>
       </div>
       <button class="nav-toggle" id="navToggle" aria-label="菜单">☰</button>
@@ -33,7 +33,7 @@
 
   <!-- ===== 首屏主视觉 ===== -->
   <header class="hero" id="home">
-    <div class="hero-bg"></div>
+    <img class="hero-bg" src="assets/images/hero-bg.jpg" alt="阿尔特里亚大陆草原与城堡风光" fetchpriority="high" onload="this.classList.add('loaded')">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-badge">经典端游IP正统续作</div>
@@ -141,25 +141,38 @@
       <h2 class="section-title">游戏攻略</h2>
       <p class="section-subtitle">新手必读 · 少走弯路</p>
     </div>
-    <div class="guide-list">
-      <a class="guide-card" href="https://mengchen.me/#guide/1" target="_blank" rel="noopener noreferrer">
-        <div class="guide-info">
-          <span class="guide-tag">职业攻略</span>
-          <h3>龙之谷启程：新手职业选择与开荒避坑指南</h3>
-          <p>五大职业到底怎么选？战神、祭司、元素师、箭神、剑圣全解析，新手一看就懂。</p>
-        </div>
-        <span class="guide-arrow">阅读全文 →</span>
+    <div class="guide-grid">
+      <a class="guide-mini" href="guide-zhiye.html">
+        <span class="guide-tag">职业攻略</span>
+        <h3>职业详细介绍：四大职业八分支全解析</h3>
+        <p>战士、弓箭手、法师、牧师详解，双转职路线怎么选，附新手选择建议。</p>
       </a>
-      <a class="guide-card" href="https://mengchen.me/#guide/45" target="_blank" rel="noopener noreferrer">
-        <div class="guide-info">
-          <span class="guide-tag">日常规划</span>
-          <h3>龙之谷启程：零氪玩家每日必做任务清单与资源规划</h3>
-          <p>上线不知道干什么？这份每日任务清单帮你高效规划资源，少走弯路快速变强。</p>
-        </div>
-        <span class="guide-arrow">阅读全文 →</span>
+      <a class="guide-mini" href="guide-wanfa.html">
+        <span class="guide-tag">新手指南</span>
+        <h3>游戏内容玩法介绍：新手入门必读</h3>
+        <p>副本闯关、时装装扮、交易所搬砖与装备强化机制全面解读。</p>
+      </a>
+      <a class="guide-mini" href="guide-jiesuo.html">
+        <span class="guide-tag">新手指南</span>
+        <h3>全系统解锁等级与玩法内核一览</h3>
+        <p>从4级技能配置到32级潜力注入，全系统解锁时间表一表看懂。</p>
+      </a>
+      <a class="guide-mini" href="guide-cailiao.html">
+        <span class="guide-tag">日常规划</span>
+        <h3>日常材料获取攻略：四大必做副本</h3>
+        <p>腐化入侵、BossRush、暗影试炼、黑暗裂隙的规则与产出定位。</p>
+      </a>
+      <a class="guide-mini" href="guide-zhanli.html">
+        <span class="guide-tag">养成攻略</span>
+        <h3>战力组成与快速提升方法</h3>
+        <p>装备、纹章、时装、坐骑、宠物与潜力注入六大战力板块全整理。</p>
+      </a>
+      <a class="guide-mini guide-mini-all" href="articles.html">
+        <span class="guide-tag">全部攻略</span>
+        <h3>进入攻略专区</h3>
+        <p>查看全部攻略文章，持续更新中。</p>
       </a>
     </div>
-    <p class="guide-more">更多攻略持续更新中，敬请期待</p>
   </section>
 
   <!-- ===== 下载区 ===== -->
@@ -192,10 +205,10 @@
         <span>龙之谷·启程</span>
       </div>
       <div class="footer-links">
+        <a href="#home">首页</a>
         <a href="#features">游戏特色</a>
         <a href="#classes">职业介绍</a>
-        <a href="#guides">游戏攻略</a>
-        <a href="https://mengchen.me" target="_blank" rel="noopener noreferrer">游戏大厅</a>
+        <a href="articles.html">游戏攻略</a>
       </div>
       <p class="footer-copyright">© 2026 龙之谷启程 All Rights Reserved</p>
       <p class="footer-disclaimer">抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。</p>

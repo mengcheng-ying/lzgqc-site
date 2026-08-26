@@ -8,15 +8,17 @@
   var navLinks = document.querySelector('.nav-links');
   var links = document.querySelectorAll('.nav-links a');
   var sections = document.querySelectorAll('section[id], header[id]');
+  // 攻略/文章子页面：导航栏始终白底（页面顶部无深色背景）
+  var isSubpage = document.body.classList.contains('subpage');
 
   // 滚动时导航栏变白
   function onScroll() {
-    if (window.scrollY > 40) {
+    if (isSubpage || window.scrollY > 40) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
-    highlightActive();
+    if (!isSubpage) highlightActive();
   }
 
   // 滚动时高亮当前区块对应的导航项
