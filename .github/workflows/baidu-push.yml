@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # 完整历史，供脚本用 git diff 检测本次变更的文件
+          fetch-depth: 0
 
       - name: 推送链接到百度
         env:

@@ -6,8 +6,10 @@
  * 推送策略（节省每日配额）：
  *  - push 事件：只推送本次提交中变更的 HTML 页面对应的链接
  *  - sitemap.xml 变更（新增页面）或手动触发：推送全量链接
+ *  - 变更文件通过 git diff（before..after）检测，事件数据仅作兜底
  */
 const fs = require('fs');
+const { execSync } = require('child_process');
 
 const SITE = 'lzgqc.mengchen.me';
 const BASE = 'https://' + SITE + '/';
@@ -19,19 +21,60 @@ if (!TOKEN) {
   process.exit(0);
 }
 
-// ===== 解析本次 push 事件中变更的文件 =====
-let changedFiles = null;
-try {
-  if (process.env.GITHUB_EVENT_NAME === 'push' && process.env.GITHUB_EVENT_PATH) {
-    const event = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
-    const set = new Set();
-    (event.commits || []).forEach(c => {
-      [].concat(c.added || [], c.modified || []).forEach(f => set.add(f));
-    });
-    changedFiles = set;
+// ===== 检测本次提交变更的文件 =====
+function gitDiffFiles(a, b) {
+  try {
+    return execSync('git diff --name-only ' + a + ' ' + b, { encoding: 'utf8' })
+      .split('\n').map(s => s.trim()).filter(Boolean);
+  } catch (e) {
+    return null;
   }
-} catch (e) {
-  changedFiles = null;
+}
+
+let changedFiles = null;
+
+if (process.env.GITHUB_EVENT_NAME === 'push') {
+  try {
+    const event = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
+
+    // 首选：git diff before..after（最可靠）
+    if (event.before && event.after) {
+      const files = gitDiffFiles(event.before, event.after);
+      if (files && files.length > 0) {
+        changedFiles = new Set(files);
+        console.log('变更检测方式：git diff ' + event.before.slice(0, 7) + '..' + event.after.slice(0, 7));
+      }
+    }
+
+    // 兜底：事件数据中的 commits 列表
+    if (!changedFiles && Array.isArray(event.commits) && event.commits.length > 0) {
+      const set = new Set();
+      event.commits.forEach(c => {
+        [].concat(c.added || [], c.modified || []).forEach(f => set.add(f));
+      });
+      if (set.size > 0) {
+        changedFiles = set;
+        console.log('变更检测方式：事件 commits 数据（' + event.commits.length + ' 个提交）');
+      }
+    }
+
+    // 再兜底：与上一次提交比较
+    if (!changedFiles) {
+      const files = gitDiffFiles('HEAD~1', 'HEAD');
+      if (files && files.length > 0) {
+        changedFiles = new Set(files);
+        console.log('变更检测方式：HEAD~1..HEAD');
+      }
+    }
+  } catch (e) {
+    console.log('⚠️ 事件数据解析异常，转入全量推送：' + e.message);
+  }
+
+  if (changedFiles) {
+    console.log('本次变更文件（' + changedFiles.size + ' 个）：' + Array.from(changedFiles).join('、'));
+  }
+} else {
+  console.log('触发方式：' + process.env.GITHUB_EVENT_NAME + '，执行全量推送。');
 }
 
 // ===== 收集 sitemap 中的全部链接 =====
@@ -43,17 +86,19 @@ if (allUrls.length === 0) {
   process.exit(0);
 }
 
-// sitemap 链接 -> 对应仓库文件名
+// sitemap 链接 -> 对应仓库文件名（Cloudflare Pages 使用无 .html 的干净 URL）
 function urlToFile(u) {
-  const f = u.replace(BASE, '');
-  return f === '' ? 'index.html' : f;
+  const f = u.replace(BASE, '').replace(/\/$/, '');
+  if (f === '') return 'index.html';
+  return f.endsWith('.html') ? f : f + '.html';
 }
 
 // ===== 决定本次推送哪些链接 =====
 let urls;
 if (!changedFiles || changedFiles.has('sitemap.xml')) {
   urls = allUrls;
-  console.log('推送模式：全量（' + urls.length + ' 条' + (changedFiles && changedFiles.has('sitemap.xml') ? '，sitemap 有变更' : '，手动触发') + '）');
+  const why = !changedFiles ? '无法检测变更' : 'sitemap 有变更';
+  console.log('推送模式：全量（' + urls.length + ' 条，' + why + '）');
 } else {
   urls = allUrls.filter(u => changedFiles.has(urlToFile(u)));
   console.log('推送模式：增量（本次变更涉及的 ' + urls.length + ' 条）');
