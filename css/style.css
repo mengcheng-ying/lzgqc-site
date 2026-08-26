@@ -141,16 +141,36 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--primary-deep) url('../assets/images/cover.jpg') center / cover no-repeat;
+  background: var(--primary-deep);
+  overflow: hidden;
+}
+
+/* 超清背景层：缓慢呼吸式微缩放，营造风吹草动的生命感 */
+.hero-bg {
+  position: absolute;
+  inset: -3%;
+  background: url('../assets/images/hero-bg.jpg') center / cover no-repeat;
+  animation: bgBreathe 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes bgBreathe {
+  0%, 100% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.045) translate(-0.6%, 0.5%); }
+}
+
+/* 尊重用户减少动态偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg { animation: none; }
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg,
-    rgba(13, 35, 82, 0.55) 0%,
-    rgba(13, 35, 82, 0.35) 40%,
-    rgba(13, 35, 82, 0.82) 100%);
+    rgba(13, 35, 82, 0.5) 0%,
+    rgba(13, 35, 82, 0.28) 40%,
+    rgba(13, 35, 82, 0.8) 100%);
 }
 
 .hero-content {
