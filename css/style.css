@@ -141,8 +141,9 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   justify-content: center;
-  /* 图片加载期间的兜底底色：近似成图的天空-草原色，避免突兀蓝屏 */
-  background: linear-gradient(180deg, #7cb4e4 0%, #a9cc8f 55%, #6f9e5a 100%);
+  /* 秒开模糊预览（LQIP 内嵌，0请求）：高清图加载期间显示模糊场景而非纯蓝 */
+  background: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABIMDRANCxIQDhAUExIVGywdGxgYGzYnKSAsQDlEQz85Pj1HUGZXR0thTT0+WXlaYWltcnNyRVV9hnxvhWZwcm7/2wBDARMUFBsXGzQdHTRuST5Jbm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm7/wAARCAANABgDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABQADBP/EABwQAAICAwEBAAAAAAAAAAAAAAABAgMEESETMf/EABYBAQEBAAAAAAAAAAAAAAAAAAEABP/EABkRAAIDAQAAAAAAAAAAAAAAAAABAhMhFP/aAAwDAQACEQMRAD8AasVd3xnPZiJdCMXNt2uivvJ1bYdLjhnpUtNqYwhHrIKvyZreiG9slBI//9k=") center center / cover no-repeat,
+              linear-gradient(180deg, #7cb4e4 0%, #a9cc8f 55%, #6f9e5a 100%);
   overflow: hidden;
 }
 
