@@ -1,0 +1,15 @@
+# HTML：每次都重新校验，保证内容即时更新
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+
+# CSS/JS：配合 ?v= 版本号参数使用，更新即换链接
+/css/*
+  Cache-Control: public, max-age=14400
+
+/js/*
+  Cache-Control: public, max-age=14400
+
+# 图片资源：长缓存，更换图片时改文件名
+/assets/*
+  Cache-Control: public, max-age=604800
