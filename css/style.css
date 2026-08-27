@@ -708,7 +708,7 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 720px) {
-  .section { padding: 60px 18px; }
+  .section { padding: 56px 18px; }
 
   /* 手机端：两个下载按钮缩小并排，放不下则堆叠 */
   .hero-actions { gap: 12px; flex-wrap: wrap; }
@@ -741,9 +741,32 @@ img { max-width: 100%; display: block; }
 
   .nav-links a { color: var(--text-secondary) !important; width: 100%; text-align: center; }
 
-  .hero-content { padding: 100px 18px 70px; }
+  .hero-content { padding: 104px 18px 70px; }
   .hero-title { letter-spacing: 3px; }
   .hero-slogan { letter-spacing: 2px; }
 
   .notice-bar { font-size: 0.8rem; }
+
+  /* 攻略卡与板块移动端优化 */
+  .guide-grid { grid-template-columns: 1fr; gap: 14px; }
+  .guide-mini { padding: 20px 18px 16px; }
+  .guide-mini h3 { font-size: 1rem; margin: 8px 0 6px; }
+  .guide-mini p { font-size: 0.85rem; }
+  .guide-tag { font-size: 0.68rem; padding: 2px 10px; }
+  .feature-grid { gap: 14px; }
+  .feature-card { padding: 20px 18px; }
+  .section-title { letter-spacing: 1px; }
+}
+@media (max-width: 480px) {
+  .nav-inner { padding: 0 16px; }
+  .hero-content { padding: 96px 14px 60px; }
+  .hero-title { font-size: clamp(2.1rem, 9.5vw, 2.8rem); letter-spacing: 2px; }
+  .hero-slogan { font-size: 0.95rem; }
+  .hero-badge { font-size: 0.78rem; letter-spacing: 2px; padding: 5px 16px; }
+  .btn-download-lg { width: 100%; justify-content: center; padding: 12px 20px; }
+  .download-section { padding: 56px 18px; }
+  .download-info h2 { font-size: 1.5rem; }
+  .download-specs { flex-direction: column; gap: 6px; }
+  .section-title { font-size: 1.5rem; }
+  .footer { padding: 40px 18px 28px; }
 }
