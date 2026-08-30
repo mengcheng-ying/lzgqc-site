@@ -257,7 +257,10 @@ img { max-width: 100%; display: block; }
 /* ===== 下载按钮内嵌游戏封面 ===== */
 .btn-cover {
   width: 52px;
+  max-width: 52px;
   height: 52px;
+  max-height: 52px;
+  flex: 0 0 52px;
   border-radius: 12px;
   object-fit: cover;
   display: block;
@@ -716,7 +719,7 @@ img { max-width: 100%; display: block; }
   .btn-icon { font-size: 1.15rem; }
   .btn-text strong { font-size: 0.95rem; letter-spacing: 1px; }
   .btn-text em { font-size: 0.65rem; }
-  .btn-cover { width: 40px; height: 40px; border-radius: 9px; }
+  .btn-cover { width: 40px; height: 40px; flex-basis: 40px; max-width: 40px; max-height: 40px; border-radius: 9px; }
 
   .nav-toggle { display: block; }
 
