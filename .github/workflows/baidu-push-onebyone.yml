@@ -1,0 +1,15 @@
+name: 百度运条推送
+
+on:
+  workflow_dispatch:
+
+jobs:
+  baidu-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 逐条推送链接到百度
+        env:
+          BAIDU_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
+        run: node .github/scripts/baidu-push-onebyone.js
