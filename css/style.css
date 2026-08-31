@@ -150,22 +150,22 @@ img { max-width: 100%; display: block; }
 /* 超清背景层：<img> 实现，加载完成后淡入，消除"蓝屏闪烁" */
 .hero-bg {
   position: absolute;
-  top: -3%;
-  left: -3%;
-  width: 106%;
-  height: 106%;
+  top: -2%;
+  left: -2%;
+  width: 104%;
+  height: 104%;
   object-fit: cover;
   opacity: 0;
   transition: opacity 0.7s ease;
-  animation: bgBreathe 22s ease-in-out infinite;
+  animation: bgBreathe 20s ease-in-out infinite;
   will-change: transform;
 }
 
 .hero-bg.loaded { opacity: 1; }
 
 @keyframes bgBreathe {
-  0%, 100% { transform: scale(1) translate(0, 0); }
-  50% { transform: scale(1.045) translate(-0.6%, 0.5%); }
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-0.5%, 0.4%); }
 }
 
 /* 尊重用户减少动态偏好 */
