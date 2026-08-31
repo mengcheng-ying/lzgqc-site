@@ -11,7 +11,7 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
 
-const SITE = 'lzgqc.mengchen.me';
+const SITE = 'lzgqc.fmbly.com';
 const BASE = 'https://' + SITE + '/';
 const TOKEN = process.env.BAIDU_TOKEN;
 

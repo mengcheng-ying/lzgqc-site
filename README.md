@@ -1,6 +1,6 @@
 # 龙之谷启程官网 · 发文章指南
 
-网站地址：https://lzgqc.mengchen.me
+网站地址：https://lzgqc.fmbly.com
 GitHub 仓库：https://github.com/mengcheng-ying/lzgqc-site
 
 ---
@@ -17,7 +17,7 @@ GitHub 仓库：https://github.com/mengcheng-ying/lzgqc-site
 
 1. 打开仓库主页，点 **Add file → Create new file**
 2. 文件名用英文小写+短横线，例如：`guide-zhuangbei.html`
-   （.html 后缀必须带；名字会成为网址，如 `lzgqc.mengchen.me/guide-zhuangbei`）
+   （.html 后缀必须带；名字会成为网址，如 `lzgqc.fmbly.com/guide-zhuangbei`）
 3. 打开仓库里的 `template.html`，点右上角铅笔图标进入编辑模式
 4. 全选复制全部内容，粘贴到刚才新建的文件里
 5. 按照【改1】~【改7】的注释逐处替换成自己文章的内容
@@ -43,7 +43,7 @@ GitHub 仓库：https://github.com/mengcheng-ying/lzgqc-site
 
 1. 打开 `sitemap.xml`，点铅笔编辑
 2. 复制任意一个 `<url>...</url>` 块，粘贴到 `</urlset>` 之前
-3. 改成：`<loc>https://lzgqc.mengchen.me/guide-zhuangbei</loc>` 和当天日期
+3. 改成：`<loc>https://lzgqc.fmbly.com/guide-zhuangbei</loc>` 和当天日期
 4. Commit 提交
 
 ### 完成！接下来全自动
