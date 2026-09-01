@@ -66,6 +66,13 @@ img { max-width: 100%; display: block; }
   color: #fff;
   font-weight: 700;
   font-size: 1.15rem;
+}
+.nav-logo .logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
   letter-spacing: 1px;
 }
 
