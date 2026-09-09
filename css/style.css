@@ -337,7 +337,7 @@ img { max-width: 100%; display: block; }
   letter-spacing: 2px;
 }
 
-.notice-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.notice-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: inherit; text-decoration: none; }
 
 /* ===== 通用区块 ===== */
 .section {
