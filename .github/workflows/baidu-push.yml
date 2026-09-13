@@ -1,6 +1,8 @@
 name: 百度链接自动推送
 
 on:
+  schedule:
+    - cron: '37 19 * * *'   # 每天北京时间 03:37（UTC 19:37）定时逐条推送
   push:
     branches: [main]
   workflow_dispatch:
@@ -17,4 +19,10 @@ jobs:
       - name: 推送链接到百度
         env:
           BAIDU_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
-        run: node .github/scripts/baidu-push.js
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            # 每日定时逐条推送，用满当日配额
+            node .github/scripts/baidu-push-onebyone.js
+          else
+            node .github/scripts/baidu-push.js
+          fi
